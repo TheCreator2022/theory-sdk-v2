@@ -5,9 +5,9 @@ import { theory } from "../api/Theory";
 import { Utils } from "../api/Utils";
 
 var id = "integral_calculus"
-var name = "Integral Calculus";
+var name = "Integral Calculus_TESTING";
 var description = "An implementation of the 'Integral Calculus' theory from the game.";
-var authors = "Gilles-Philippe Paillé";
+var authors = "Spideybot975";
 var version = 1;
 
 var q = BigNumber.ZERO;
@@ -284,5 +284,5 @@ var getC3 = (level) => Utils.getStepwisePowerSum(level, 2, 10, 0);
 var getC4 = (level) => BigNumber.TWO.pow(level);
 var getC5 = (level) => BigNumber.TWO.pow(level);
 var getC1Exp = (level) => BigNumber.from(1 + level * 0.05);
-
+ 
 init();
