@@ -5,9 +5,9 @@ import { theory } from "../api/Theory";
 import { Utils } from "../api/Utils";
 
 var id = "recurrence_relation";
-var name = "Recurrence Relation";
+var name = "Recurrence Relation_testing";
 var description = "An implementation of the 'Recurrence Relation' theory from the game.";
-var authors = "Gilles-Philippe Paillé";
+var authors = "GSpideybot975";
 var version = 1;
 
 var rhoN = BigNumber.ZERO;
@@ -110,16 +110,16 @@ var init = () => {
 
     {
         c3Term = theory.createMilestoneUpgrade(2, 1);
-        c3Term.description = Localization.getUpgradeAddTermDesc("\\rho_{n-1}^{0.2}");
-        c3Term.info = Localization.getUpgradeAddTermInfo("\\rho_{n-1}^{0.2}");
+        c3Term.description = Localization.getUpgradeAddTermDesc("\\rho_{n-1}^{2}");
+        c3Term.info = Localization.getUpgradeAddTermInfo("\\rho_{n-1}^{2}");
         c3Term.boughtOrRefunded = (_) => { theory.invalidatePrimaryEquation(); updateAvailability(); };
         c3Term.canBeRefunded = (_) => c4Term.level == 0;
     }
 
     {
         c4Term = theory.createMilestoneUpgrade(3, 1);
-        c4Term.description = Localization.getUpgradeAddTermDesc("\\rho_{n-2}^{0.3}");
-        c4Term.info = Localization.getUpgradeAddTermInfo("\\rho_{n-2}^{0.3}");
+        c4Term.description = Localization.getUpgradeAddTermDesc("\\rho_{n-2}^{3}");
+        c4Term.info = Localization.getUpgradeAddTermInfo("\\rho_{n-2}^{3}");
         c4Term.boughtOrRefunded = (_) => { theory.invalidatePrimaryEquation(); updateAvailability(); };
         c4Term.isAvailable = false;
     }
