@@ -284,5 +284,5 @@ var getC3 = (level) => Utils.getStepwisePowerSum(level, 2, 10, 0);
 var getC4 = (level) => BigNumber.TWO.pow(level);
 var getC5 = (level) => BigNumber.TWO.pow(level);
 var getC1Exp = (level) => BigNumber.from(1 + level * 0.05);
-
+ 
 init();
