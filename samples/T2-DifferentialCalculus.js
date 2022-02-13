@@ -5,9 +5,9 @@ import { theory } from "../api/Theory";
 import { Utils } from "../api/Utils";
 
 var id = "differential_calculus"
-var name = "Differential Calculus";
+var name = "Differential Calculus_TESTING";
 var description = "An implementation of the 'Differential Calculus' theory from the game.";
-var authors = "Gilles-Philippe Paillé";
+var authors = "SpideyBot975";
 var version = 1;
 
 var currency;
@@ -36,7 +36,7 @@ var init = () => {
     {
         let getDesc = (level) => "\\dot{q}_2=" + getDQ2(level).toString(0) + (qTerms.level > 0 ? "\\times q_3" : "");
         let getInfo = (level) => "\\dot{q}_2=" + (getDQ2(level) * (dq3.level > 0 ? q3 : BigNumber.ONE)).toString();
-        dq2 = theory.createUpgrade(1, currency, new ExponentialCost(5000, Math.log2(2)));
+        dq2 = theory.createUpgrade(1, currency, new ExponentialCost(10, Math.log2(2)));
         dq2.getDescription = (amount) => Utils.getMath(getDesc(dq2.level));
         dq2.getInfo = (amount) => Utils.getMathTo(getInfo(dq2.level), getInfo(dq2.level + amount));
     }
@@ -45,7 +45,7 @@ var init = () => {
     {
         let getDesc = (level) => "\\dot{q}_3=" + getDQ3(level).toString(0) + (qTerms.level > 1 ? "\\times q_4" : "");
         let getInfo = (level) => "\\dot{q}_3=" + (getDQ3(level) * (dq4.level > 0 ? q4 : BigNumber.ONE)).toString();
-        dq3 = theory.createUpgrade(2, currency, new ExponentialCost(3e25, Math.log2(3)));
+        dq3 = theory.createUpgrade(2, currency, new ExponentialCost(10, Math.log2(2)));
         dq3.getDescription = (amount) => Utils.getMath(getDesc(dq3.level));
         dq3.getInfo = (amount) => Utils.getMathTo(getInfo(dq3.level), getInfo(dq3.level + amount));
     }
@@ -54,7 +54,7 @@ var init = () => {
     {
         let getDesc = (level) => "\\dot{q}_4=" + getDQ4(level).toString(0);
         let getInfo = (level) => "\\dot{q}_4=" + getDQ4(level).toString(0);
-        dq4 = theory.createUpgrade(3, currency, new ExponentialCost(8e50, Math.log2(4)));
+        dq4 = theory.createUpgrade(3, currency, new ExponentialCost(10, Math.log2(2)));
         dq4.getDescription = (amount) => Utils.getMath(getDesc(dq4.level));
         dq4.getInfo = (amount) => Utils.getMathTo(getInfo(dq4.level), getInfo(dq4.level + amount));
     }
@@ -63,7 +63,7 @@ var init = () => {
     {
         let getDesc = (level) => "\\dot{r}_1=" + getDR1(level).toString(0) + "\\times r_2";
         let getInfo = (level) => "\\dot{r}_1=" + (getDR1(level) * r2).toString();
-        dr1 = theory.createUpgrade(4, currency, new ExponentialCost(2e6, Math.log2(2)));
+        dr1 = theory.createUpgrade(4, currency, new ExponentialCost(10, Math.log2(2)));
         dr1.getDescription = (amount) => Utils.getMath(getDesc(dr1.level));
         dr1.getInfo = (amount) => Utils.getMathTo(getInfo(dr1.level), getInfo(dr1.level + amount));
     }
@@ -72,7 +72,7 @@ var init = () => {
     {
         let getDesc = (level) => "\\dot{r}_2=" + getDR2(level).toString(0) + (rTerms.level > 0 ? "\\times r_3" : "");
         let getInfo = (level) => "\\dot{r}_2=" + (getDR2(level) * (dr3.level > 0 ? r3 : BigNumber.ONE)).toString();
-        dr2 = theory.createUpgrade(5, currency, new ExponentialCost(3e9, Math.log2(2)));
+        dr2 = theory.createUpgrade(5, currency, new ExponentialCost(10, Math.log2(2)));
         dr2.getDescription = (amount) => Utils.getMath(getDesc(dr2.level));
         dr2.getInfo = (amount) => Utils.getMathTo(getInfo(dr2.level), getInfo(dr2.level + amount));
     }
@@ -81,7 +81,7 @@ var init = () => {
     {
         let getDesc = (level) => "\\dot{r}_3=" + getDR3(level).toString(0) + (rTerms.level > 1 ? "\\times r_4" : "");
         let getInfo = (level) => "\\dot{r}_3=" + (getDR3(level) * (dr4.level > 0 ? r4 : BigNumber.ONE)).toString();
-        dr3 = theory.createUpgrade(6, currency, new ExponentialCost(4e25, Math.log2(3)));
+        dr3 = theory.createUpgrade(6, currency, new ExponentialCost(10, Math.log2(2)));
         dr3.getDescription = (amount) => Utils.getMath(getDesc(dr3.level));
         dr3.getInfo = (amount) => Utils.getMathTo(getInfo(dr3.level), getInfo(dr3.level + amount));
     }
@@ -90,7 +90,7 @@ var init = () => {
     {
         let getDesc = (level) => "\\dot{r}_4=" + getDR4(level).toString(0);
         let getInfo = (level) => "\\dot{r}_4=" + getDR4(level).toString(0);
-        dr4 = theory.createUpgrade(7, currency, new ExponentialCost(5e50, Math.log2(4)));
+        dr4 = theory.createUpgrade(7, currency, new ExponentialCost(10, Math.log2(2)));
         dr4.getDescription = (amount) => Utils.getMath(getDesc(dr4.level));
         dr4.getInfo = (amount) => Utils.getMathTo(getInfo(dr4.level), getInfo(dr4.level + amount));
     }
@@ -228,8 +228,8 @@ var getQuaternaryEntries = () => {
     return quaternaryEntries;
 }
 
-var getPublicationMultiplier = (tau) => tau.pow(0.198) / BigNumber.HUNDRED;
-var getPublicationMultiplierFormula = (symbol) => "\\frac{{" + symbol + "}^{0.198}}{100}";
+var getPublicationMultiplier = (tau) => tau.pow(2) / BigNumber.HUNDRED;
+var getPublicationMultiplierFormula = (symbol) => "\\frac{{" + symbol + "}^{2}}{1}";
 var getTau = () => currency.value;
 var get2DGraphValue = () => currency.value.sign * (BigNumber.ONE + currency.value.abs()).log10().toNumber();
 
