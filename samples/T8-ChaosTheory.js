@@ -5,9 +5,9 @@ import { theory } from "../api/Theory";
 import { Utils } from "../api/Utils";
 
 var id = "chaos_theory"
-var name = "Chaos Theory";
+var name = "Chaos Theory_TESTING";
 var description = "An implementation of the 'Chaos Theory' from the game.";
-var authors = "Gilles-Philippe Paillé";
+var authors = "SpideyBot975";
 var version = 1;
 
 var state, center, scale;
@@ -30,7 +30,7 @@ var swizzles = [(v) => new Vector3(v.y, v.z, v.x),
                 (v) => new Vector3(v.y, v.z, v.x),
                 (v) => new Vector3(v.x, v.y, v.z)];
 
-var dts = [0.02, 0.002, 0.00014];
+var dts = [0.2, 0.02, 0.0014];
 
 var init = () => {
     currency = theory.createCurrency();
