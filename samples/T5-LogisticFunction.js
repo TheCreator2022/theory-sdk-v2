@@ -5,9 +5,9 @@ import { theory } from "../api/Theory";
 import { Utils } from "../api/Utils";
 
 var id = "logistic_function"
-var name = "Logistic Function";
+var name = "Logistic Function_BROKEN";
 var description = "An implementation of the 'Logistic Function' theory from the game.";
-var authors = "Gilles-Philippe Paillé";
+var authors = "SpiderBot975";
 var version = 1;
 
 var q = BigNumber.ONE;
@@ -32,9 +32,9 @@ var init = () => {
 
     // q2
     {
-        let getDesc = (level) => "q_2=2^{" + level + "}";
+        let getDesc = (level) => "q_2=3^{" + level + "}";
         let getInfo = (level) => "q_2=" + getQ2(level).toString(0);
-        q2 = theory.createUpgrade(1, currency, new ExponentialCost(15, Math.log2(64)));
+        q2 = theory.createUpgrade(1, currency, new FreeCost(15, Math.log2(64)));
         q2.getDescription = (amount) => Utils.getMath(getDesc(q2.level));
         q2.getInfo = (amount) => Utils.getMathTo(getInfo(q2.level), getInfo(q2.level + amount));
     }
