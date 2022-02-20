@@ -5,9 +5,9 @@ import { theory } from "../api/Theory";
 import { Utils } from "../api/Utils";
 
 var id = "logistic_function"
-var name = "Logistic Function";
+var name = "Logistic Function_broken";
 var description = "An implementation of the 'Logistic Function' theory from the game.";
-var authors = "Gilles-Philippe Paillé";
+var authors = "Spideybot975";
 var version = 1;
 
 var q = BigNumber.ONE;
@@ -32,9 +32,9 @@ var init = () => {
 
     // q2
     {
-        let getDesc = (level) => "q_2=2^{" + level + "}";
+        let getDesc = (level) => "q_2=3^{" + level + "}";
         let getInfo = (level) => "q_2=" + getQ2(level).toString(0);
-        q2 = theory.createUpgrade(1, currency, new ExponentialCost(15, Math.log2(64)));
+        q2 = theory.createUpgrade(1, currency, new FreeCost;
         q2.getDescription = (amount) => Utils.getMath(getDesc(q2.level));
         q2.getInfo = (amount) => Utils.getMathTo(getInfo(q2.level), getInfo(q2.level + amount));
     }
@@ -59,9 +59,9 @@ var init = () => {
 
     // c3
     {
-        let getDesc = (level) => "c_3=2^{" + level + "}";
+        let getDesc = (level) => "c_3=2.001^{" + level + "}";
         let getInfo = (level) => "c_3=" + getC3(level).toString(0);
-        c3 = theory.createUpgrade(4, currency, new ExponentialCost(1e3, Math.log2(8.85507e7)));
+        c3 = theory.createUpgrade(4, currency, new ExponentialCost(1e3, Math.log2(8.855e7)));
         c3.getDescription = (amount) => Utils.getMath(getDesc(c3.level));
         c3.getInfo = (amount) => Utils.getMathTo(getInfo(c3.level), getInfo(c3.level + amount));
     }
@@ -114,7 +114,7 @@ var tick = (elapsedTime, multiplier) => {
     let vc1 = getC1(c1.level);
     let vc2 = getC2(c2.level);
     let vc3 = c3Term.level > 0 ? getC3(c3.level).pow(getC3Exp(c3Exp.level)) : BigNumber.ONE;
-    let dq = (vc1 / vc2) * q * (vc3 - q / vc2) * dt;
+    let dq = (vc1 / vc2) * q * (vc3 + q / vc2) * dt;
 
     q = q + dq.max(BigNumber.ZERO);
     q = q.min(vc2 * vc3);
@@ -150,7 +150,7 @@ var getPrimaryEquation = () => {
     {
         result += "1";
     }
-    result += "-q/c_2)\\end{matrix}";
+    result += "+q/c_2)\\end{matrix}";
 
     theory.primaryEquationHeight = 55;
 
@@ -161,7 +161,7 @@ var getSecondaryEquation = () => theory.latexSymbol + "=\\max\\rho";
 var getTertiaryEquation = () => "q=" + q.toString();
 
 var getPublicationMultiplier = (tau) => tau.pow(0.159);
-var getPublicationMultiplierFormula = (symbol) => "{" + symbol + "}^{0.159}";
+var getPublicationMultiplierFormula = (symbol) => "{" + symbol + "}^{0.16}";
 var getTau = () => currency.value;
 var get2DGraphValue = () => currency.value.sign * (BigNumber.ONE + currency.value.abs()).log10().toNumber();
 
