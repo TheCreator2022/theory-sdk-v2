@@ -5,9 +5,9 @@ import { theory } from "../api/Theory";
 import { Utils } from "../api/Utils";
 
 var id = "logistic_function"
-var name = "Logistic Function";
+var name = "Logistic Function_broken";
 var description = "An implementation of the 'Logistic Function' theory from the game.";
-var authors = "Gilles-Philippe Paillé";
+var authors = "Spideybot975";
 var version = 1;
 
 var q = BigNumber.ONE;
@@ -114,7 +114,7 @@ var tick = (elapsedTime, multiplier) => {
     let vc1 = getC1(c1.level);
     let vc2 = getC2(c2.level);
     let vc3 = c3Term.level > 0 ? getC3(c3.level).pow(getC3Exp(c3Exp.level)) : BigNumber.ONE;
-    let dq = (vc1 / vc2) * q * (vc3 - q / vc2) * dt;
+    let dq = (vc1 / vc2) * q * (vc3 + q / vc2) * dt;
 
     q = q + dq.max(BigNumber.ZERO);
     q = q.min(vc2 * vc3);
@@ -150,7 +150,7 @@ var getPrimaryEquation = () => {
     {
         result += "1";
     }
-    result += "-q/c_2)\\end{matrix}";
+    result += "+q/c_2)\\end{matrix}";
 
     theory.primaryEquationHeight = 55;
 
@@ -161,7 +161,7 @@ var getSecondaryEquation = () => theory.latexSymbol + "=\\max\\rho";
 var getTertiaryEquation = () => "q=" + q.toString();
 
 var getPublicationMultiplier = (tau) => tau.pow(0.159);
-var getPublicationMultiplierFormula = (symbol) => "{" + symbol + "}^{0.159}";
+var getPublicationMultiplierFormula = (symbol) => "{" + symbol + "}^{0.16}";
 var getTau = () => currency.value;
 var get2DGraphValue = () => currency.value.sign * (BigNumber.ONE + currency.value.abs()).log10().toNumber();
 
