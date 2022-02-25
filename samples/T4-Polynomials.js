@@ -5,9 +5,9 @@ import { theory } from "../api/Theory";
 import { Utils } from "../api/Utils";
 
 var id = "polynomials"
-var name = "Polynomials";
+var name = "Polynomials_broken";
 var description = "An implementation of the 'Polynomials' theory from the game.";
-var authors = "Gilles-Philippe Paillé";
+var authors = "SpideyBot975";
 var version = 1;
 
 var q = BigNumber.ZERO;
@@ -31,7 +31,7 @@ var init = () => {
 
     // c2
     {
-        let getDesc = (level) => "c_2=2^{" + level + "}";
+        let getDesc = (level) => "c_2=3^{" + level + "}";
         let getInfo = (level) => "c_2=" + getC2(level).toString(0);
         c2 = theory.createUpgrade(1, currency, new ExponentialCost(20, Math.log2(3.75)));
         c2.getDescription = (amount) => Utils.getMath(getDesc(c2.level));
@@ -40,7 +40,7 @@ var init = () => {
 
     // c3
     {
-        let getDesc = (level) => "c_3=2^{" + level + "}";
+        let getDesc = (level) => "c_3=3^{" + level + "}";
         let getInfo = (level) => "c_3=" + getC3(level).toString(0);
         c3 = theory.createUpgrade(2, currency, new ExponentialCost(2000, Math.log2(2.468)));
         c3.getDescription = (amount) => Utils.getMath(getDesc(c3.level));
@@ -71,7 +71,7 @@ var init = () => {
     {
         let getDesc = (level) => "c_6=10^{" + level + "}";
         let getInfo = (level) => "c_6=" + getC6(level).toString(0);
-        c6 = theory.createUpgrade(5, currency, new ExponentialCost(1e10, Math.log2(58)));
+        c6 = theory.createUpgrade(5, currency, new ExponentialCost(1e5, Math.log2(58)));
         c6.getDescription = (amount) => Utils.getMath(getDesc(c6.level));
         c6.getInfo = (amount) => Utils.getMathTo(getInfo(c6.level), getInfo(c6.level + amount));
         c6.isAvailable = false;
@@ -88,7 +88,7 @@ var init = () => {
 
     // q2
     {
-        let getDesc = (level) => "q_2=2^{" + level + "}";
+        let getDesc = (level) => "q_2=3^{" + level + "}";
         let getInfo = (level) => "q_2=" + getQ2(level).toString(0);
         q2 = theory.createUpgrade(7, currency, new ExponentialCost(1e4, Math.log2(1000)));
         q2.getDescription = (amount) => Utils.getMath(getDesc(q2.level));
@@ -97,9 +97,9 @@ var init = () => {
 
     /////////////////////
     // Permanent Upgrades
-    theory.createPublicationUpgrade(0, currency, 1e9);
-    theory.createBuyAllUpgrade(1, currency, 1e13);
-    theory.createAutoBuyerUpgrade(2, currency, 1e30);
+    theory.createPublicationUpgrade(0, currency, 9);
+    theory.createBuyAllUpgrade(1, currency, 13);
+    theory.createAutoBuyerUpgrade(2, currency, 30);
 
     /////////////////////
     // Checkpoint Upgrades
@@ -210,8 +210,8 @@ var getSecondaryEquation = () => {
 
 var getTertiaryEquation = () => "q=" + q.toString();
 
-var getPublicationMultiplier = (tau) => tau.pow(0.165) / BigNumber.FOUR;
-var getPublicationMultiplierFormula = (symbol) => "\\frac{{" + symbol + "}^{0.165}}{4}";
+var getPublicationMultiplier = (tau) => tau.pow(1.5) / BigNumber.FOUR;
+var getPublicationMultiplierFormula = (symbol) => "\\frac{{" + symbol + "}^{1.5}}{1}";
 var getTau = () => currency.value;
 var get2DGraphValue = () => currency.value.sign * (BigNumber.ONE + currency.value.abs()).log10().toNumber();
 
