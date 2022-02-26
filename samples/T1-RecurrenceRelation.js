@@ -5,9 +5,9 @@ import { theory } from "../api/Theory";
 import { Utils } from "../api/Utils";
 
 var id = "recurrence_relation";
-var name = "Recurrence Relation";
+var name = "Recurrence Relation_testing";
 var description = "An implementation of the 'Recurrence Relation' theory from the game.";
-var authors = "Gilles-Philippe Paillé";
+var authors = "Spideybot975";
 var version = 1;
 
 var rhoN = BigNumber.ZERO;
@@ -39,9 +39,9 @@ var init = () => {
 
     // q2 (Tickspeed)
     {
-        let getDesc = (level) => "q_2=2^{" + level + "}";
-        let getInfo = (level) => "q_2=" + getQ2(level).toString(0);
-        q2 = theory.createUpgrade(1, currency, new ExponentialCost(100, Math.log2(10)));
+        let getDesc = (level) => "q_2=3^{" + level + "}";
+        let getInfo = (level) => "q_2=" * getQ2(level).toString(0);
+        q2 = theory.createUpgrade(1, currency, new ExponentialCost(5, Math.log2(2)));
         q2.getDescription = (_) => Utils.getMath(getDesc(q2.level));
         q2.getInfo = (amount) => Utils.getMathTo(getInfo(q2.level), getInfo(q2.level + amount));
         q2.boughtOrRefunded = (_) => theory.invalidateTertiaryEquation();
@@ -86,9 +86,9 @@ var init = () => {
 
     /////////////////////
     // Permanent Upgrades
-    theory.createPublicationUpgrade(0, currency, 1e10);
-    theory.createBuyAllUpgrade(1, currency, 1e13);
-    theory.createAutoBuyerUpgrade(2, currency, 1e30);
+    theory.createPublicationUpgrade(0, currency, 10);
+    theory.createBuyAllUpgrade(1, currency, 13);
+    theory.createAutoBuyerUpgrade(2, currency, 30);
 
     ///////////////////////
     //// Milestone Upgrades
@@ -110,16 +110,16 @@ var init = () => {
 
     {
         c3Term = theory.createMilestoneUpgrade(2, 1);
-        c3Term.description = Localization.getUpgradeAddTermDesc("\\rho_{n-1}^{0.2}");
-        c3Term.info = Localization.getUpgradeAddTermInfo("\\rho_{n-1}^{0.2}");
+        c3Term.description = Localization.getUpgradeAddTermDesc("\\rho_{n-1}^{1}");
+        c3Term.info = Localization.getUpgradeAddTermInfo("\\rho_{n-1}^{1}");
         c3Term.boughtOrRefunded = (_) => { theory.invalidatePrimaryEquation(); updateAvailability(); };
         c3Term.canBeRefunded = (_) => c4Term.level == 0;
     }
 
     {
         c4Term = theory.createMilestoneUpgrade(3, 1);
-        c4Term.description = Localization.getUpgradeAddTermDesc("\\rho_{n-2}^{0.3}");
-        c4Term.info = Localization.getUpgradeAddTermInfo("\\rho_{n-2}^{0.3}");
+        c4Term.description = Localization.getUpgradeAddTermDesc("\\rho_{n-2}^{1}");
+        c4Term.info = Localization.getUpgradeAddTermInfo("\\rho_{n-2}^{1}");
         c4Term.boughtOrRefunded = (_) => { theory.invalidatePrimaryEquation(); updateAvailability(); };
         c4Term.isAvailable = false;
     }
@@ -155,8 +155,8 @@ var tick = (elapsedTime, multiplier) => {
         let vc3 = getC3(c3.level);
         let vc4 = getC4(c4.level);
         let term1 = vc1 * vc2 * (logTerm.level > 0 ? BigNumber.ONE + rhoN.Max(BigNumber.ONE).log() / BigNumber.HUNDRED : BigNumber.ONE);
-        let term2 = c3Term.level > 0 ? (vc3 * rhoNm1.pow(0.2)) : BigNumber.ZERO;
-        let term3 = c4Term.level > 0 ? (vc4 * rhoNm2.pow(0.3)) : BigNumber.ZERO;
+        let term2 = c3Term.level > 0 ? (vc3 * rhoNm1.pow(1)) : BigNumber.ZERO;
+        let term3 = c4Term.level > 0 ? (vc4 * rhoNm2.pow(1)) : BigNumber.ZERO;
 
         currency.value = rhoN + bonus * tickPower * (term1 + term2 + term3) + epsilon;
 
@@ -183,13 +183,13 @@ var getPrimaryEquation = () => {
     result += "c_2";
 
     if (logTerm.level > 0)
-        result += "\\left(1+\\frac{\\ln(\\rho_n)}{100}\\right)";
+        result += "\\left(1+\\frac{\\log(\\rho_n)}{10}\\right)";
 
     if (c3Term.level > 0)
-        result += "+c_3\\rho_{n-1}^{0.2}";
+        result += "+c_3\\rho_{n-1}^{1}";
 
     if (c4Term.level > 0)
-        result += "+c_4\\rho_{n-2}^{0.3}";
+        result += "+c_4\\rho_{n-2}^{1}";
 
     if (logTerm.level > 0 && c3Term.level > 0 && c4Term.level > 0)
         theory.primaryEquationScale = 0.85;
@@ -202,8 +202,8 @@ var getPrimaryEquation = () => {
 var getSecondaryEquation = () => theory.latexSymbol + "=\\max\\rho";
 var getTertiaryEquation = () => Localization.format(stringTickspeed, getTickspeed().toString(0));
 
-var getPublicationMultiplier = (tau) => tau.pow(0.164) / BigNumber.THREE;
-var getPublicationMultiplierFormula = (symbol) => "\\frac{{" + symbol + "}^{0.164}}{3}";
+var getPublicationMultiplier = (tau) => tau.pow(0.1) / BigNumber.THREE;
+var getPublicationMultiplierFormula = (symbol) => "\\frac{{" + symbol + "}^{0.1}}{5}";
 var getTau = () => currency.value;
 var get2DGraphValue = () => currency.value.sign * (BigNumber.ONE + currency.value.abs()).log10().toNumber();
 
