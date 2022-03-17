@@ -5,9 +5,9 @@ import { theory } from "../api/Theory";
 import { Utils } from "../api/Utils";
 
 var id = "recurrence_relation";
-var name = "Recurrence Relation";
+var name = "Recurrence Relation_testing2";
 var description = "An implementation of the 'Recurrence Relation' theory from the game.";
-var authors = "Gilles-Philippe Paillé";
+var authors = "Spideybot975";
 var version = 1;
 
 var rhoN = BigNumber.ZERO;
@@ -183,13 +183,13 @@ var getPrimaryEquation = () => {
     result += "c_2";
 
     if (logTerm.level > 0)
-        result += "\\left(1+\\frac{\\ln(\\rho_n)}{100}\\right)";
+        result += "\\left(1+\\frac{\\log(\\rho_n)}{100}\\right)";
 
     if (c3Term.level > 0)
-        result += "+c_3\\rho_{n-1}^{0.2}";
+        result += "+c_3\\rho_{n-1}^{0.21}";
 
     if (c4Term.level > 0)
-        result += "+c_4\\rho_{n-2}^{0.3}";
+        result += "+c_4\\rho_{n-2}^{0.31}";
 
     if (logTerm.level > 0 && c3Term.level > 0 && c4Term.level > 0)
         theory.primaryEquationScale = 0.85;
