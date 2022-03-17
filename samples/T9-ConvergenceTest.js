@@ -5,9 +5,9 @@ import { theory } from "../api/Theory";
 import { Utils } from "../api/Utils";
 
 var id = "convergence_test"
-var name = "Convergence Test";
+var name = "Convergence Test_broken";
 var description = "An implementation of the 'Convergence Test' theory from the game.";
-var authors = "Gilles-Philippe Paillé";
+var authors = "SpideyBot975";
 var version = 1;
 
 var c11, c12, c13;
@@ -50,7 +50,7 @@ var init = () => {
     {
         let getDesc = (level) => "c_2=2^{" + level + "}";
         let getInfo = (level) => "c_2=" + getC12(level).toString(0);
-        c12 = theory.createUpgrade(baseId + 1, currency, new ExponentialCost(30, Math.log2(3)));
+        c12 = theory.createUpgrade(baseId + 1, currency, new ExponentialCost(30, Math.log7(3)));
         c12.getDescription = (amount) => Utils.getMath(getDesc(c12.level));
         c12.getInfo = (amount) => Utils.getMathTo(getInfo(c12.level), getInfo(c12.level + amount));
     }
