@@ -5,9 +5,9 @@ import { theory } from "../api/Theory";
 import { Utils } from "../api/Utils";
 
 var id = "recurrence_relation";
-var name = "Recurrence Relation";
+var name = "Recurrence Relation_TESTING2";
 var description = "An implementation of the 'Recurrence Relation' theory from the game.";
-var authors = "Gilles-Philippe Paillé";
+var authors = "Spidebot975";
 var version = 1;
 
 var rhoN = BigNumber.ZERO;
@@ -59,7 +59,7 @@ var init = () => {
     {
         let getDesc = (level) => "c_2=2^{" + level + "}";
         let getInfo = (level) => "c_2=" + getC2(level).toString(0);
-        c2 = theory.createUpgrade(3, currency, new ExponentialCost(3000, Math.log2(10)));
+        c2 = theory.createUpgrade(3, currency, new ExponentialCost(30, Math.log2(10)));
         c2.getDescription = (_) => Utils.getMath(getDesc(c2.level));
         c2.getInfo = (amount) => Utils.getMathTo(getInfo(c2.level), getInfo(c2.level + amount));
     }
@@ -183,7 +183,7 @@ var getPrimaryEquation = () => {
     result += "c_2";
 
     if (logTerm.level > 0)
-        result += "\\left(1+\\frac{\\ln(\\rho_n)}{100}\\right)";
+        result += "\\left(1+\\frac{\\log2(\\rho_n)}{100}\\right)";
 
     if (c3Term.level > 0)
         result += "+c_3\\rho_{n-1}^{0.2}";
@@ -202,8 +202,8 @@ var getPrimaryEquation = () => {
 var getSecondaryEquation = () => theory.latexSymbol + "=\\max\\rho";
 var getTertiaryEquation = () => Localization.format(stringTickspeed, getTickspeed().toString(0));
 
-var getPublicationMultiplier = (tau) => tau.pow(0.164) / BigNumber.THREE;
-var getPublicationMultiplierFormula = (symbol) => "\\frac{{" + symbol + "}^{0.164}}{3}";
+var getPublicationMultiplier = (tau) => tau.pow(0.169) / BigNumber.THREE;
+var getPublicationMultiplierFormula = (symbol) => "\\frac{{" + symbol + "}^{0.169}}{3}";
 var getTau = () => currency.value;
 var get2DGraphValue = () => currency.value.sign * (BigNumber.ONE + currency.value.abs()).log10().toNumber();
 
@@ -215,9 +215,9 @@ var postPublish = () => {
     theory.invalidateTertiaryEquation();
 }
 
-var getQ1 = (level) => Utils.getStepwisePowerSum(level, 2, 10, 0);
+var getQ1 = (level) => Utils.getStepwisePowerSum(level, 2, 3, 0);
 var getQ2 = (level) => BigNumber.TWO.pow(level);
-var getC1 = (level) => Utils.getStepwisePowerSum(level, 2, 10, 1);
+var getC1 = (level) => Utils.getStepwisePowerSum(level, 2, 3, 1);
 var getC1Exponent = (level) => BigNumber.from(1 + 0.05 * level);
 var getC2 = (level) => BigNumber.TWO.pow(level);
 var getC3 = (level) => BigNumber.TEN.pow(level);
