@@ -1,4 +1,4 @@
-import { Color } from "./properties/Color";
+import { Colors } from "./properties/Color";
 import { FontAttributes } from "./properties/FontAttributes";
 import { FontFamily } from "./properties/FontFamily";
 import { Thickness } from "./properties/Thickness";
